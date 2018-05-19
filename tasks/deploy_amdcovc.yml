@@ -1,0 +1,26 @@
+---
+- name: amdcovc | Deploy amdcovc configuration
+  template:
+    src: "amdcovc.j2"
+    dest: "/usr/bin/amdcovc_setclock"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+  notify:
+  - "Restart amdcovc"
+- name: amdcovc | Deploy amdcovc service
+  template:
+    src: "amdcovc.service.j2"
+    dest: "/etc/systemd/system/amdcovc.service"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+- name: amdcovc | Enable amdcovc service
+  systemd:
+    name: "amdcovc"
+    state: "started"
+    daemon_reload: "yes"
+    enabled: "yes"
+  when:
+  - "vars['amdcovc_enable'] is defined"
+  - "vars['amdcovc_enable'] == true"

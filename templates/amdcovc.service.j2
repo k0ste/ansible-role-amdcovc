@@ -1,0 +1,15 @@
+{{ '## admcovc.service' }}
+{{ '# ' + ansible_managed }}
+{{ '# Do not edit manually' }}
+
+{{ '[Unit]' }}
+{{ 'Description=Set ATI AMD Cards clocks' }}
+{{ 'Before=xmrig-amd@%i.service' }}
+{{ '' }}
+{{ '[Service]' }}
+{{ 'Type=oneshot' }}
+{{ 'RemainAfterExit=yes' }}
+{{ 'ExecStart=/usr/bin/amdcovc_setclock' }}
+{{ '' }}
+{{ '[Install]' }}
+{{ 'WantedBy=multi-user.target' }}

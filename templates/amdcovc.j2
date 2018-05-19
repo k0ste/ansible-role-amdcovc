@@ -1,0 +1,20 @@
+{{ '#!/bin/bash' }}
+{{ '## ' + 'amdcovc' }}
+{{ '# ' + ansible_managed }}
+{{ '# ' + 'Do not edit manually' }}
+
+{% for c in vars['amdcovc_instance_settings'] %}
+{% if c.card is defined and c.card != '' %}
+{{ '/usr/bin/amdcovc' -}}
+{% if c.core_clock is defined and c.core_clock != '' -%}
+{{ ' ' ~ 'coreclk:' ~ c.card ~ '=' ~ c.core_clock -}}
+{% endif %}
+{% if c.mem_clock is defined and c.mem_clock != '' -%}
+{{ ' ' ~ 'memclk:' ~ c.card ~ '=' ~ c.mem_clock -}}
+{% endif %}
+{% if c.fan_speed is defined and c.fan_speed != '' -%}
+{{ ' ' ~ 'fanspeed:' ~ c.card ~ '=' ~ c.fan_speed -}}
+{% endif %}
+{% endif %}
+{{ '' }}
+{% endfor %}

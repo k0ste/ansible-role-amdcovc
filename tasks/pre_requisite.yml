@@ -1,0 +1,18 @@
+---
+- name: amdcovc | Add the OS specific variables
+  include_vars: "{{ hostvars[inventory_hostname]['ansible_os_family'] +
+                    '.yml' }}"
+- name: amdcovc | Set facts about role settings
+  set_fact:
+    amdcovc_enable: "{{ hostvars[inventory_hostname]['amdcovc'] |
+      json_query(\"[].role_settings[] | map(&enable || 'no', @) | [0]\") }}"
+    amdcovc_restart: "{{ hostvars[inventory_hostname]['amdcovc'] |
+      json_query(\"[].role_settings[] | map(&restart || 'no', @) | [0]\") }}"
+    amdcovc_install_package: "{{ hostvars[inventory_hostname]['amdcovc'] |
+      json_query(\"[].role_settings[] |
+      map(&install_package || 'no', @) | [0]\") }}"
+    amdcovc_package_state: "{{ hostvars[inventory_hostname]['amdcovc'] |
+      json_query(\"[].role_settings[] |
+      map(&package_state || 'present', @) | [0]\") }}"
+    amdcovc_instance_settings: "{{ hostvars[inventory_hostname]['amdcovc'] |
+                                   json_query('[].instance_settings[]') }}"

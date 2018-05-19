@@ -1,0 +1,6 @@
+---
+- name: amdcovc | Install the required packages in ArchLinux derivatives
+  pacman:
+    name: "{{ hostvars[inventory_hostname]['amdcovc_package'] }}"
+    state: "{{ vars['amdcovc_package_state'] | default(omit) }}"
+    update_cache: "yes"

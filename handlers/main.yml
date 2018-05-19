@@ -1,0 +1,8 @@
+---
+- name: Restart amdcovc
+  systemd:
+    name: "amdcovc"
+    state: "restarted"
+  when:
+  - "vars['amdcovc_restart'] is defined"
+  - "vars['amdcovc_restart'] == true"
