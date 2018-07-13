@@ -1,4 +1,3 @@
-
 # ansible-amdcovc
 
 Deploy [amdcovc](//github.com/matszpk/amdcovc) - Utility to overclock AMD Radeon
@@ -6,7 +5,7 @@ GPU's.
 
 ## Requirements
 
-* Ansible 2.4+;
+* Ansible 2.5+;
 * Linux systemd distro (ArchLinux 100% supported);
 
 # Extra
